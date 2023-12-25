@@ -5,7 +5,8 @@ import CoinSearchBar from './components/CoinSearchBar';
 import TrendingCoins from './components/Trending';
 import SkeletonLoader from './components/SkeletonLoader';
 import DetailedCoinInfo from './components/DetailedCoinInfo';
-import { Card } from '@/components/ui/card';
+import { Card, CardHeader } from '@/components/ui/card';
+import NewsFeed from './components/NewsFeed';
 
 const GraphPage = () => {
   const [selectedCoinId, setSelectedCoinId] = useState('');
@@ -33,19 +34,26 @@ const GraphPage = () => {
                       <>
                           {selectedCoinId && <DetailedCoinInfo coinId={selectedCoinId} />}
                           <Card style={{ transition: 'all 0.5s ease' }}>
+                            <CardHeader>Coin Market Chart</CardHeader>
                               <LineChart coinId={selectedCoinId} />
                           </Card>
                       </>
                   )}
               </div>
 
-              <div style={{ flex: 1, transition: 'all 0.5s ease' }}>
+              <div style={{ flex: 1, transition: 'all 0.5s ease', gap: '20rem' }}>
                   <Card>
                       <h2 style={{padding: "0.5rem"}}>Trending</h2>
                       <TrendingCoins />
                   </Card>
               </div>
           </div>
+              <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px', transition: 'all 0.5s ease' }}>
+                  
+                  <CardHeader style={{padding: "0.5rem"}}>News</CardHeader>
+                  <NewsFeed coinId={selectedCoinId} />
+                  
+              </div>
       </div>
   );
 };
