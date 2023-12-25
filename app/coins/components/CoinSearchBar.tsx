@@ -66,6 +66,7 @@ const CoinSearchBar: React.FC<CoinSearchBarProps> = ({ onCoinSelect }) => {
                                 borderBottom: '1px solid #eee', 
                                 cursor: 'pointer',
                                 transition: 'background-color 0.2s ease',
+                                color: '#1a2b3b',
                             }}>
                                 <img src={coin.thumb} alt={coin.name} style={{ width: '30px', height: '30px', marginRight: '10px' }} />
                                 <span>{coin.name}</span>

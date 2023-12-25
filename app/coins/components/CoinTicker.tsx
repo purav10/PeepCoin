@@ -42,14 +42,14 @@ const CoinTicker = ({ coinId }: { coinId: string }) => {
             {isLoading ? (
               <div>Loading...</div>
             ) : (
-              <Table>
+                <Table>
                 <TableHeader>
-                  <tr>
+                  <TableRow>
                     <TableHead>Base/Target</TableHead>
                     <TableHead>Last Price</TableHead>
                     <TableHead>Volume</TableHead>
                     <TableHead>Status</TableHead>
-                  </tr>
+                  </TableRow>
                 </TableHeader>
                 <tbody>
                   {tickers.map((ticker, index) => (

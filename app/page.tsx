@@ -52,7 +52,7 @@ export default function Home() {
           >
             <div className="justify-start">
               <h2 className="flex items-center font-semibold text-[1em] text-[#1a2b3b]">
-                View Coins
+                Crypto Aggregator
               </h2>
               <p className="text-[14px] leading-[20px] text-[#1a2b3b] font-normal">
                 Click on 'Explore' to navigate through the APIs integrated in this website.

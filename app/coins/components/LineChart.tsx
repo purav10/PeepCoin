@@ -94,15 +94,15 @@ const LineChart = ({ coinId = 'bitcoin' }) => {
         </Tabs>
 
         <Select onValueChange={setSelectedCurrency} defaultValue={selectedCurrency}>
-          <SelectTrigger>
-            <SelectValue placeholder="Currency" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="usd">USD</SelectItem>
-            <SelectItem value="jpy">JPY</SelectItem>
-            <SelectItem value="eur">EUR</SelectItem>
-          </SelectContent>
-        </Select>
+        <SelectTrigger>
+          <SelectValue placeholder="Currency" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="usd">USD</SelectItem>
+          <SelectItem value="jpy">JPY</SelectItem>
+          <SelectItem value="eur">EUR</SelectItem>
+        </SelectContent>
+      </Select>
       </div>
 
       <canvas ref={ref}></canvas>

@@ -8,7 +8,75 @@ import DetailedCoinInfo from './components/DetailedCoinInfo';
 import { Card, CardHeader } from '@/components/ui/card';
 import NewsFeed from './components/NewsFeed';
 import CoinTicker from './components/CoinTicker';
-import Link from 'next/link'
+import styled from 'styled-components';
+
+// Styled components for the page
+const PageContainer = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.5s ease;
+  color: #1E2B3A; 
+  background: #F2F3F5;
+`;
+
+const FlexRow = styled.div`
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  transition: all 0.5s ease;
+`;
+
+const MainContent = styled.div`
+  flex: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.5s ease;
+`;
+
+const Sidebar = styled.div`
+  flex: 1;
+  transition: all 0.5s ease;
+  gap: 20px;
+`;
+
+const NewsSection = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.5s ease;
+
+`;
+const HeaderContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const HeaderContainer = styled.div`
+  background-color: #1E2B3A; 
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column; // Changed to column layout
+  gap: 10px; // Add a gap between elements
+`;
+
+
+const HeaderTitle = styled.h1`
+  font-size: 1.75rem; // Adjust font size as needed
+  font-weight: bold;
+`;
+
+const HeaderSubtitle = styled.p`
+  font-size: 1rem;
+  opacity: 0.9;
+`;
 
 
 const GraphPage = () => {
@@ -16,56 +84,60 @@ const GraphPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-      setTimeout(() => setIsLoading(false), 1000);
+    setTimeout(() => setIsLoading(false), 1000);
   }, []);
 
   const handleCoinSelect = (coinId: string) => {
-      setIsLoading(true);
-      setSelectedCoinId(coinId);
-      setTimeout(() => setIsLoading(false), 1000);
+    setIsLoading(true);
+    setSelectedCoinId(coinId);
+    setTimeout(() => setIsLoading(false), 1000);
   };
 
   return (
-      <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px', transition: 'all 0.5s ease' }}>
-          <CoinSearchBar onCoinSelect={handleCoinSelect} />
+    <PageContainer>
+      <HeaderContainer>
+        <HeaderContent>
+          <HeaderTitle>Crypto Dashboard</HeaderTitle>
+          <HeaderSubtitle>Explore Cryptocurrency Trends and News</HeaderSubtitle>
+        </HeaderContent>
+      </HeaderContainer>
 
-          <div style={{ display: 'flex', gap: '20px', marginTop: '20px', transition: 'all 0.5s ease' }}>
-              <div style={{ flex: 10, display: 'flex', flexDirection: 'column', gap: '20px', transition: 'all 0.5s ease' }}>
-                  {isLoading ? (
-                      <SkeletonLoader />
-                  ) : (
-                      <>
-                          {selectedCoinId && <DetailedCoinInfo coinId={selectedCoinId} />}
-                          <Card style={{ transition: 'all 0.5s ease' }}>
-                            <CardHeader>Coin Market Chart</CardHeader>
-                            <LineChart coinId={selectedCoinId} />
-                          </Card>
-                      </>
-                  )}
-              </div>
-
-              <div style={{ flex: 1, transition: 'all 0.5s ease', gap: '20rem' }}>
-                  <Card style={{ transition: 'all 0.5s ease' }}>
-                      <TrendingCoins />
-                  </Card>
-                  <Card style={{ transition: 'all 0.5s ease', marginTop: '20px' }}> 
-                      <div>
-                        {selectedCoinId && <CoinTicker coinId={selectedCoinId} />}
-                      </div>
-                  </Card>
-              </div>
-          </div>
-
-          {selectedCoinId && (
-              <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px', transition: 'all 0.5s ease' }}>
-                  <CardHeader style={{padding: "0.5rem"}}>News</CardHeader>
-                  <NewsFeed coinId={selectedCoinId} />
-              </div>
+      <FlexRow>
+        <MainContent>
+            <CoinSearchBar onCoinSelect={handleCoinSelect} />
+          {isLoading ? (
+            <SkeletonLoader />
+          ) : (
+            <>
+              {selectedCoinId && <DetailedCoinInfo coinId={selectedCoinId} />}
+              <Card>
+                <CardHeader>Coin Market Chart</CardHeader>
+                <LineChart coinId={selectedCoinId} />
+              </Card>
+            </>
           )}
-      </div>
+        </MainContent>
+
+        <Sidebar>
+        <Card style={{ width: '500px' }}>
+            <TrendingCoins />
+        </Card>
+        <Card style={{ width: '500px', marginTop: '20px' }}> 
+            <div>
+            {selectedCoinId && <CoinTicker coinId={selectedCoinId} />}
+            </div>
+        </Card>
+        </Sidebar>
+      </FlexRow>
+
+      {selectedCoinId && (
+        <NewsSection>
+          <CardHeader style={{padding: "0.5rem"}}>Latest Crypto News</CardHeader>
+          <NewsFeed coinId={selectedCoinId} />
+        </NewsSection>
+      )}
+    </PageContainer>
   );
 };
 
 export default GraphPage;
-
-
