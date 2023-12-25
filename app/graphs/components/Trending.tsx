@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card } from '@/components/ui/card';
+import { Card, CardHeader } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 
@@ -40,9 +40,10 @@ const TrendingCoins = () => {
     
     return (
         <div style={{ display: 'flex', justifyContent: 'right', padding: '20px' }}>
-            <ScrollAreaPrimitive.Root className="ScrollAreaRoot" style={{ width: 500, height: 500 }}>
+            <ScrollAreaPrimitive.Root className="ScrollAreaRoot" style={{ width: 500, height: 625, overflow: 'hidden' }}>
                 <ScrollAreaPrimitive.Viewport style={{ width: '100%', height: '100%' }}>
                     <Card className="w-500px h-400px overflow-auto">
+                    <CardHeader>Trending</CardHeader>
                         <Table className="bg-background text-foreground">
                             <TableHeader className="text-center">
                                 <TableRow>

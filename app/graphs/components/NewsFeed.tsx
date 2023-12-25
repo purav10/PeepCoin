@@ -28,7 +28,11 @@ const NewsFeed: React.FC<Props> = ({ coinId }) => {
         const response = await fetch(`https://newsapi.org/v2/everything?q=${coinId}&apiKey=6cf1ae7a05e54341819fded828c94dcc`);
         if (!response.ok) throw new Error('Failed to fetch news articles.');
         const data = await response.json();
-        setArticles(data.articles.slice(0, 3)); // Take only the first 3 articles
+        if (data.articles.length === 0) {
+        articles.push({ title: 'No news available', description: '', url: '', urlToImage: '' });
+        } else {
+          setArticles(data.articles.slice(0, 3));
+        }
       } catch (e: any) {
         setError(e.message);
       } finally {
@@ -39,13 +43,17 @@ const NewsFeed: React.FC<Props> = ({ coinId }) => {
     fetchArticles();
   }, [coinId]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return(
+    
+    <Card style={{ display: 'flex', flexDirection: 'row', gap: '20px', padding: '20px' }}>
+        Loading...
+    </Card>);
+  if (error) return <div>{error}</div>;
 
   return (
     <Card style={{ display: 'flex', flexDirection: 'row', gap: '20px', padding: '20px' }}>
       {articles.map((article, index) => (
-        <Card key={index} style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px', gap: "20", padding: '20px' }}>
+        <Card key={index} style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px', gap: "20px", padding: '20px' }}>
           <img src={article.urlToImage} alt="Article" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
           <CardHeader>{article.title}</CardHeader>
           <CardDescription>{article.description}</CardDescription>

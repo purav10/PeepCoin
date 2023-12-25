@@ -31,7 +31,10 @@ const DetailedCoinInfo: React.FC<DetailedCoinInfoProps> = ({ coinId }) => {
         }
     }, [coinId]);
 
-    if (!coinData) return <div>Loading...</div>;
+    if (!coinData) return (
+    <Card style={{ display: 'flex', flexDirection: 'row', gap: '20px', padding: '20px' }}>
+        Loading...
+    </Card>);
 
     return (
         <Card style={{ display: 'flex', flexDirection: 'column', padding: '20px', gap: '20px' }}>
@@ -43,7 +46,7 @@ const DetailedCoinInfo: React.FC<DetailedCoinInfoProps> = ({ coinId }) => {
                     {coinData.hashing_algorithm && <CardDescription>Algorithm: {coinData.hashing_algorithm}</CardDescription>}
                     <CardContent>Market Cap: ${coinData.market_data.market_cap.usd.toLocaleString()}</CardContent>
                     <CardContent>Current Price: ${coinData.market_data.current_price.usd.toLocaleString()}</CardContent>
-                    <a href={coinData.links.homepage[0]} target="_blank" rel="noopener noreferrer" style={{ marginTop: '10px', textDecoration: 'underline', color:'blue'}}>Site</a>
+                    <a href={coinData.links.homepage[0]} target="_blank" rel="noopener noreferrer" style={{ marginTop: '10px', textDecoration: 'underline', color:'blue'}}>Homepage</a>
                 </Card>
 
                 {/* Card for Description */}

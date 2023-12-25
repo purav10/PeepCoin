@@ -7,6 +7,7 @@ import SkeletonLoader from './components/SkeletonLoader';
 import DetailedCoinInfo from './components/DetailedCoinInfo';
 import { Card, CardHeader } from '@/components/ui/card';
 import NewsFeed from './components/NewsFeed';
+import CoinTicker from './components/CoinTicker';
 
 const GraphPage = () => {
   const [selectedCoinId, setSelectedCoinId] = useState('');
@@ -35,28 +36,34 @@ const GraphPage = () => {
                           {selectedCoinId && <DetailedCoinInfo coinId={selectedCoinId} />}
                           <Card style={{ transition: 'all 0.5s ease' }}>
                             <CardHeader>Coin Market Chart</CardHeader>
-                              <LineChart coinId={selectedCoinId} />
+                            <LineChart coinId={selectedCoinId} />
                           </Card>
                       </>
                   )}
               </div>
 
               <div style={{ flex: 1, transition: 'all 0.5s ease', gap: '20rem' }}>
-                  <Card>
-                      <h2 style={{padding: "0.5rem"}}>Trending</h2>
+                  <Card style={{ transition: 'all 0.5s ease' }}>
                       <TrendingCoins />
+                  </Card>
+                  <Card style={{ transition: 'all 0.5s ease', marginTop: '20px' }}> 
+                      <div>
+                        {selectedCoinId && <CoinTicker coinId={selectedCoinId} />}
+                      </div>
                   </Card>
               </div>
           </div>
+
+          {selectedCoinId && (
               <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px', transition: 'all 0.5s ease' }}>
-                  
                   <CardHeader style={{padding: "0.5rem"}}>News</CardHeader>
                   <NewsFeed coinId={selectedCoinId} />
-                  
               </div>
+          )}
       </div>
   );
 };
 
 export default GraphPage;
+
 

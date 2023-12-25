@@ -6,11 +6,28 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 Chart.register(...registerables);
 
+// Cache object
+interface DataCache {
+  [key: string]: any;
+}
+const dataCache : DataCache = {};
+
 const fetchCoinData = async (coinId: string, days = '1', currency = 'usd') => {
+  const cacheKey = `${coinId}-${days}-${currency}`;
+  // Check if data is in cache
+  if (dataCache[cacheKey]) {
+    return dataCache[cacheKey];
+  }
+  
   const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}`);
   const data = await response.json();
+  
+  // Store data in cache
+  dataCache[cacheKey] = data;
   return data;
 };
+
+
 
 const LineChart = ({ coinId = 'bitcoin' }) => {
   const ref = useRef<HTMLCanvasElement>(null);
