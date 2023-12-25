@@ -53,7 +53,7 @@ const NewsFeed: React.FC<Props> = ({ coinId }) => {
   return (
     <Card style={{ display: 'flex', flexDirection: 'row', gap: '20px', padding: '20px' }}>
       {articles.map((article, index) => (
-        <Card key={index} style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px', gap: "20px", padding: '20px' }}>
+        <Card key={index} style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px', gap: "20px", padding: '20px',flex: 0.33 }}>
           <img src={article.urlToImage} alt="Article" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
           <CardHeader>{article.title}</CardHeader>
           <CardDescription>{article.description}</CardDescription>

@@ -40,7 +40,7 @@ const TrendingCoins = () => {
     
     return (
         <div style={{ display: 'flex', justifyContent: 'right', padding: '20px' }}>
-            <ScrollAreaPrimitive.Root className="ScrollAreaRoot" style={{ width: 500, height: 625, overflow: 'hidden' }}>
+            <ScrollAreaPrimitive.Root className="ScrollAreaRoot" style={{ width: 500, height: 685, overflow: 'hidden' }}>
                 <ScrollAreaPrimitive.Viewport style={{ width: '100%', height: '100%' }}>
                     <Card className="w-500px h-400px overflow-auto">
                     <CardHeader>Trending</CardHeader>

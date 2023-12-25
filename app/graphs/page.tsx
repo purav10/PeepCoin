@@ -8,9 +8,11 @@ import DetailedCoinInfo from './components/DetailedCoinInfo';
 import { Card, CardHeader } from '@/components/ui/card';
 import NewsFeed from './components/NewsFeed';
 import CoinTicker from './components/CoinTicker';
+import Link from 'next/link'
+
 
 const GraphPage = () => {
-  const [selectedCoinId, setSelectedCoinId] = useState('');
+  const [selectedCoinId, setSelectedCoinId] = useState('bitcoin');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
