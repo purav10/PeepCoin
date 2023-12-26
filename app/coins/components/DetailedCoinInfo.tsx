@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import DetailedCoinInfoSkeleton from './DetailedCoinInfoSkeleton';
+import styled from 'styled-components';
+
+const CoinDetailsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column; // Stack elements vertically on smaller screens
+  }
+`;
 
 interface DataCache {
   [key: string]: any;
@@ -69,23 +81,41 @@ const DetailedCoinInfo: React.FC<DetailedCoinInfoProps> = ({ coinId }) => {
     </Card>);
 
     return (
-        <Card style={{ display: 'flex', flexDirection: 'column', padding: '20px', gap: '20px' }}>
-            <div style={{ display: 'flex', gap: '20px'}}>
-                {/* Card for Image, Name, Symbol, and Key Statistics */}
-                <Card style={{ flex: '1', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <img src={coinData.image.large} alt={coinData.name} style={{ width: '100px', height: '100px' }} />
-                    <CardHeader>{coinData.name} ({coinData.symbol.toUpperCase()})</CardHeader>
-                    {coinData.hashing_algorithm && <CardDescription>Algorithm: {coinData.hashing_algorithm}</CardDescription>}
-                    <CardContent>Market Cap: ${coinData.market_data.market_cap.usd.toLocaleString()}</CardContent>
-                    <CardContent>Current Price: ${coinData.market_data.current_price.usd.toLocaleString()}</CardContent>
-                    <a href={coinData.links.homepage[0]} target="_blank" rel="noopener noreferrer" style={{ marginTop: '10px', textDecoration: 'underline', color:'blue'}}>Homepage</a>
-                </Card>
+        <Card>
+        <CoinDetailsContainer>
+          {/* Card for Image, Name, Symbol, and Key Statistics */}
+          <Card style={{flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px', margin: '10px', borderRadius: '10px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+  <img src={coinData.image.large} alt={coinData.name} style={{ width: '100px', height: '100px', marginBottom: '10px' }}/>
+  <CardHeader style={{ marginBottom: '5px' }}>{coinData.name} ({coinData.symbol.toUpperCase()})</CardHeader>
+  {coinData.hashing_algorithm && (
+    <CardDescription style={{ marginBottom: '5px' }}>
+      Algorithm: {coinData.hashing_algorithm}
+    </CardDescription>
+  )}
+  <CardContent style={{ marginBottom: '5px' }}>
+    Market Cap: ${coinData.market_data.market_cap.usd.toLocaleString()}
+  </CardContent>
+  <CardContent style={{ marginBottom: '10px' }}>
+    Current Price: ${coinData.market_data.current_price.usd.toLocaleString()}
+  </CardContent>
+  <a 
+    href={coinData.links.homepage[0]} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    style={{ 
+      marginTop: '10px', 
+      textDecoration: 'underline', 
+      color:'blue' 
+    }}
+  >
+    Homepage
+  </a>
+</Card>
 
-                {/* Card for Description */}
-                <Card style={{ flexGrow: '1', padding: '20px', alignItems: 'stretch' }}>
-                    <CardDescription dangerouslySetInnerHTML={{ __html: coinData.description.en }} style={{ textAlign: 'justify', overflowY: 'auto' }}></CardDescription>
-                </Card>
-            </div>
+          <Card style={{ flexGrow: 1, padding: '20px' }}>
+        <CardDescription dangerouslySetInnerHTML={{ __html: coinData.description.en }} style={{ textAlign: 'justify', overflowY: 'auto' }}></CardDescription>
+      </Card>
+      </CoinDetailsContainer>
         </Card>
     );
 };
