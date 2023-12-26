@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import LineChart from './components/LineChart';
 import CoinSearchBar from './components/CoinSearchBar';
 import TrendingCoins from './components/Trending';
-import SkeletonLoader from './components/SkeletonLoader';
 import DetailedCoinInfo from './components/DetailedCoinInfo';
 import { Card, CardHeader } from '@/components/ui/card';
 import NewsFeed from './components/NewsFeed';

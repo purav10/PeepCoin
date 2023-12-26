@@ -26,7 +26,7 @@ const NewsFeed: React.FC<Props> = ({ coinId }) => {
 
       try {
         const response = await fetch(`https://newsapi.org/v2/everything?q=${coinId}&apiKey=6cf1ae7a05e54341819fded828c94dcc`);
-        if (!response.ok) throw new Error('Failed to fetch news articles. Trust Me this works on my computer🥲');
+        if (!response.ok) throw new Error('Failed to fetch news articles. Trust me this works on my computer🥲');
         const data = await response.json();
         if (data.articles.length === 0) {
         articles.push({ title: 'No news available', description: '', url: '', urlToImage: '' });

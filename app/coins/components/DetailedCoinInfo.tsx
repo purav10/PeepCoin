@@ -10,7 +10,7 @@ const CoinDetailsContainer = styled.div`
   padding: 20px;
 
   @media screen and (max-width: 768px) {
-    flex-direction: column; // Stack elements vertically on smaller screens
+    flex-direction: column;
   }
 `;
 
@@ -83,7 +83,6 @@ const DetailedCoinInfo: React.FC<DetailedCoinInfoProps> = ({ coinId }) => {
     return (
         <Card>
         <CoinDetailsContainer>
-          {/* Card for Image, Name, Symbol, and Key Statistics */}
           <Card style={{flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px', margin: '10px', borderRadius: '10px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
   <img src={coinData.image.large} alt={coinData.name} style={{ width: '100px', height: '100px', marginBottom: '10px' }}/>
   <CardHeader style={{ marginBottom: '5px' }}>{coinData.name} ({coinData.symbol.toUpperCase()})</CardHeader>
@@ -102,11 +101,7 @@ const DetailedCoinInfo: React.FC<DetailedCoinInfoProps> = ({ coinId }) => {
     href={coinData.links.homepage[0]} 
     target="_blank" 
     rel="noopener noreferrer" 
-    style={{ 
-      marginTop: '10px', 
-      textDecoration: 'underline', 
-      color:'blue' 
-    }}
+    style={{ marginTop: '10px', textDecoration: 'underline', color:'blue' }}
   >
     Homepage
   </a>

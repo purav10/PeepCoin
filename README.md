@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Features
 
-## Getting Started
+- **Line Chart**: Visual representation of cryptocurrency prices over time.
+- **Coin Search Bar**: Allows users to search for specific cryptocurrencies.
+- **Trending Coins**: Displays a list of currently trending cryptocurrencies.
+- **Detailed Coin Information**: Shows detailed information about each selected cryptocurrency.
+- **News Feed**: Provides the latest news related to the cryptocurrency market.
 
-First, run the development server:
+## Components
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- `LineChart`: 
+	- Renders a line chart using Chart.js for a specified cryptocurrency.
+	- API used : https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}
+- `CoinSearchBar`: 
+	- A search bar component for finding cryptocurrencies.
+	- API used : https://api.coingecko.com/api/v3/search?query=${query}
+- `TrendingCoins`: 
+	- Displays a list of trending cryptocurrencies, fetched from the CoinGecko API.
+	- API used : https://api.coingecko.com/api/v3/search/trending
+- `DetailedCoinInfo`: 
+	- Shows detailed information about a selected cryptocurrency, including market cap, price, and other relevant data.
+	- API used : https://api.coingecko.com/api/v3/coins/${coinId}
+- `NewsFeed`: 
+	- Displays the latest news related to cryptocurrency.
+	- API used : https://newsapi.org/v2/everything?q=${coinId}&apiKey="YOUR_API_KEY"
+	- The developer mode of news API only enables CORS on localhost that is why the newsAPI doesn't work on deployed Vercel App.
+- `CoinTicker`:
+	- Shows ticker information about a selected cryptocurrency.
+	- API used : https://api.coingecko.com/api/v3/coins/${coinId}/tickers
+- `SkeletonLoaders` (`LineChartSkeleton`, `DetailedCoinInfoSkeleton`, `CoinTickerSkeleton`): Placeholder components displayed while data is being loaded.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## APIs
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **CoinGecko API**: Used in several components to fetch data:
+    - `fetchCoinData` in `LineChart` fetches historical price data for a specific coin.
+    - `TrendingCoins` fetches data about currently trending coins.
+    - `DetailedCoinInfo` fetches detailed data about a specific coin.
+- **NewsAPI** : Fetches the latest news articles related to the query.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Setup and Local Development
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js (preferably the latest stable version)
+- npm (usually comes with Node.js)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Clone the Repository:**
+    
+    ```
+  	git clone https://github.com/purav10/PeepCoin
+    cd PeepCoin
+     ```
+    
+2. **Install Dependencies:**
+    
+    `npm install --force`
+    
+3. **Environment Variables:**
+    
+    - If the application requires any environment variables (The newsAPI key), set them up in a `.env` file in the root directory.
+4. **Start the Development Server:**
+    
+    `npm run dev`
+    
+    This will run the app in development mode. Open http://localhost:3000 to view it in the browser. The page will reload if you make edits.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### This project is deployed on vercel app (https://peepcoin.vercel.app/)

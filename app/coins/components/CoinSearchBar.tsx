@@ -30,8 +30,8 @@ const CoinSearchBar: React.FC<CoinSearchBarProps> = ({ onCoinSelect }) => {
 
     const handleSelect = (coinId: string) => {
         onCoinSelect(coinId);
-        setQuery(''); // Reset query
-        setSearchResults([]); // Clear results
+        setQuery(''); 
+        setSearchResults([]); 
     };
 
     return (
