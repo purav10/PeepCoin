@@ -58,7 +58,7 @@ const CoinSearchBar: React.FC<CoinSearchBarProps> = ({ onCoinSelect }) => {
                     zIndex: 1000
                 }}>
                     {searchResults.map(coin => (
-                        <ScrollArea>
+                        <ScrollArea key={coin.id}>
                             <div key={coin.id} onClick={() => handleSelect(coin.id)} style={{
                                 display: 'flex', 
                                 alignItems: 'center', 
