@@ -23,29 +23,39 @@ const PageContainer = styled.div`
   color: #1E2B3A; 
   background: #F2F3F5;
 `;
-
 const FlexRow = styled.div`
   display: flex;
   gap: 20px;
   margin-top: 20px;
   transition: all 0.5s ease;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const Sidebar = styled.div`
-  flex: 1 0 300px; 
+  flex: 1 0 300px;
   max-width: 100%;
   transition: all 0.5s ease;
   gap: 20px;
-`;
 
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    flex: none;
+  }
+`;
 const MainContent = styled.div`
   flex: 3 1 auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
   transition: all 0.5s ease;
-`;
 
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+`;
 
 const NewsSection = styled.div`
   padding: 20px;
@@ -127,10 +137,10 @@ const GraphPage = () => {
         </MainContent>
 
         <Sidebar>
-          <Card style={{ width: '500px' }}>
+          <Card style={{ width: '100%', maxWidth: '500px' }}>
             <TrendingCoins onTrendingCoinSelect={handleCoinSelect} />
           </Card>
-          <Card style={{ width: '500px', marginTop: '20px' }}>
+          <Card style={{ width: '100%', maxWidth: '500px', marginTop: '20px' }}>
             <div>
               {isLoading ? <CoinTickerSkeleton /> : selectedCoinId && <CoinTicker coinId={selectedCoinId} />}
             </div>
