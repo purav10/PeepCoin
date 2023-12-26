@@ -68,7 +68,7 @@ const CoinSearchBar: React.FC<CoinSearchBarProps> = ({ onCoinSelect }) => {
                                 transition: 'background-color 0.2s ease',
                                 color: '#1a2b3b',
                             }}>
-                                <img src={coin.thumb} alt={coin.name} style={{ width: '30px', height: '30px', marginRight: '10px' }} />
+                                <img key={coin.id} src={coin.thumb} alt={coin.name} style={{ width: '30px', height: '30px', marginRight: '10px' }} />
                                 <span>{coin.name}</span>
                             </div>
                             <ScrollBar orientation="vertical" />
