@@ -10,7 +10,6 @@ import NewsFeed from './components/NewsFeed';
 import CoinTicker from './components/CoinTicker';
 import styled from 'styled-components';
 
-// Styled components for the page
 const PageContainer = styled.div`
   padding: 20px;
   display: flex;
@@ -63,13 +62,13 @@ const HeaderContainer = styled.div`
   border-radius: 8px;
   margin-bottom: 20px;
   display: flex;
-  flex-direction: column; // Changed to column layout
-  gap: 10px; // Add a gap between elements
+  flex-direction: column;
+  gap: 10px;
 `;
 
 
 const HeaderTitle = styled.h1`
-  font-size: 1.75rem; // Adjust font size as needed
+  font-size: 1.75rem; 
   font-weight: bold;
 `;
 
@@ -120,7 +119,7 @@ const GraphPage = () => {
 
         <Sidebar>
         <Card style={{ width: '500px' }}>
-            <TrendingCoins />
+          <TrendingCoins onTrendingCoinSelect={handleCoinSelect} />
         </Card>
         <Card style={{ width: '500px', marginTop: '20px' }}> 
             <div>
