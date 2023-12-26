@@ -90,7 +90,7 @@ const LineChart = ({ coinId = 'bitcoin' }) => {
   return (
     <div style={{ height: "100%", width: "100%", padding: "20px" }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <Tabs defaultValue="1" onValueChange={setSelectedDays} style={{ flexGrow: 1, marginRight: '50px' }}>
+        <Tabs value={selectedDays} onValueChange={setSelectedDays} style={{ flexGrow: 1, marginRight: '50px' }}>
           <TabsList>
             <TabsTrigger value="1">1 Day</TabsTrigger>
             <TabsTrigger value="14">14 Days</TabsTrigger>

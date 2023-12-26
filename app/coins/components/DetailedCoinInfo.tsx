@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import DetailedCoinInfoSkeleton from './DetailedCoinInfoSkeleton';
 
+interface DataCache {
+  [key: string]: any;
+}
+const dataCache : DataCache = {};
+
 interface CoinDetails {
     id: string;
     name: string;
@@ -37,9 +42,15 @@ const DetailedCoinInfo: React.FC<DetailedCoinInfoProps> = ({ coinId }) => {
     useEffect(() => {
         const fetchCoinData = async () => {
           setIsLoading(true);
+          const cacheKey = `${coinId}`;
+          if (dataCache[cacheKey]) {
+            return dataCache[cacheKey];
+          }
           try {
             const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`);
             const data = await response.json();
+            dataCache[cacheKey] = data;
+            
             setCoinData(data);
           } catch (error) {
             console.error('Error fetching coin data:', error);
@@ -59,7 +70,7 @@ const DetailedCoinInfo: React.FC<DetailedCoinInfoProps> = ({ coinId }) => {
 
     return (
         <Card style={{ display: 'flex', flexDirection: 'column', padding: '20px', gap: '20px' }}>
-            <div style={{ display: 'flex', gap: '20px', alignItems: 'stretch' }}>
+            <div style={{ display: 'flex', gap: '20px'}}>
                 {/* Card for Image, Name, Symbol, and Key Statistics */}
                 <Card style={{ flex: '1', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <img src={coinData.image.large} alt={coinData.name} style={{ width: '100px', height: '100px' }} />
@@ -71,7 +82,7 @@ const DetailedCoinInfo: React.FC<DetailedCoinInfoProps> = ({ coinId }) => {
                 </Card>
 
                 {/* Card for Description */}
-                <Card style={{ flexGrow: '1', padding: '20px' }}>
+                <Card style={{ flexGrow: '1', padding: '20px', alignItems: 'stretch' }}>
                     <CardDescription dangerouslySetInnerHTML={{ __html: coinData.description.en }} style={{ textAlign: 'justify', overflowY: 'auto' }}></CardDescription>
                 </Card>
             </div>
