@@ -31,19 +31,21 @@ const FlexRow = styled.div`
   transition: all 0.5s ease;
 `;
 
+const Sidebar = styled.div`
+  flex: 1 0 300px; 
+  max-width: 100%;
+  transition: all 0.5s ease;
+  gap: 20px;
+`;
+
 const MainContent = styled.div`
-  flex: 10;
+  flex: 3 1 auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
   transition: all 0.5s ease;
 `;
 
-const Sidebar = styled.div`
-  flex: 1;
-  transition: all 0.5s ease;
-  gap: 20px;
-`;
 
 const NewsSection = styled.div`
   padding: 20px;
