@@ -14,20 +14,20 @@ import DetailedCoinInfoSkeleton from './components/DetailedCoinInfoSkeleton';
 import CoinTickerSkeleton from './components/CoinTickerSkeleton';
 
 
+
 const PageContainer = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  transition: all 0.5s ease;
   color: #1E2B3A; 
   background: #F2F3F5;
 `;
+
 const FlexRow = styled.div`
   display: flex;
   gap: 20px;
-  margin-top: 20px;
-  transition: all 0.5s ease;
+  flex-wrap: wrap; // Allow items to wrap in smaller screens
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -35,28 +35,31 @@ const FlexRow = styled.div`
 `;
 
 const Sidebar = styled.div`
-  flex: 1 0 300px;
-  max-width: 100%;
+  flex: 1;
+  min-width: 250px; // Ensure sidebar has a reasonable minimum width
   transition: all 0.5s ease;
-  gap: 20px;
 
   @media screen and (max-width: 768px) {
     width: 100%;
-    flex: none;
+    order: 2; // Reorder sidebar below the main content on small screens
   }
 `;
+
 const MainContent = styled.div`
-  flex: 3 1 auto;
+  flex: 3;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  transition: all 0.5s ease;
 
   @media screen and (max-width: 768px) {
     width: 100%;
+    order: 1; // Ensure main content is at the top on small screens
   }
 `;
 
+const CardStyled = styled(Card)`
+  width: 100%;
+`;
 const NewsSection = styled.div`
   padding: 20px;
   display: flex;
@@ -128,23 +131,20 @@ const GraphPage = () => {
           ) : (
             <>
               {selectedCoinId && <DetailedCoinInfo coinId={selectedCoinId} />}
-              <Card>
+              <CardStyled>
                 <CardHeader>Coin Market Chart</CardHeader>
                 <LineChart coinId={selectedCoinId} />
-              </Card>
+              </CardStyled>
             </>
           )}
         </MainContent>
-
         <Sidebar>
-          <Card style={{ width: '100%', maxWidth: '500px' }}>
+          <CardStyled>
             <TrendingCoins onTrendingCoinSelect={handleCoinSelect} />
-          </Card>
-          <Card style={{ width: '100%', maxWidth: '500px', marginTop: '20px' }}>
-            <div>
-              {isLoading ? <CoinTickerSkeleton /> : selectedCoinId && <CoinTicker coinId={selectedCoinId} />}
-            </div>
-          </Card>
+          </CardStyled>
+          <CardStyled style={{ marginTop: '20px' }}>
+            {isLoading ? <CoinTickerSkeleton /> : selectedCoinId && <CoinTicker coinId={selectedCoinId} />}
+          </CardStyled>
         </Sidebar>
       </FlexRow>
 
