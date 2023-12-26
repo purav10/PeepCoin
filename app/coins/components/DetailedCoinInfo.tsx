@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
+import DetailedCoinInfoSkeleton from './DetailedCoinInfoSkeleton';
 
-// TypeScript Interfaces
 interface CoinDetails {
     id: string;
     name: string;
@@ -20,20 +20,41 @@ interface DetailedCoinInfoProps {
     coinId: string;
 }
 
+const retryFetch = async (fn: () => Promise<any>, retries: number = 3, delay: number = 1000): Promise<any> => {
+    try {
+      return await fn();
+    } catch (error) {
+      if (retries === 1) throw error;
+      await new Promise(r => setTimeout(r, delay));
+      return retryFetch(fn, retries - 1, delay);
+    }
+  };
+
 const DetailedCoinInfo: React.FC<DetailedCoinInfoProps> = ({ coinId }) => {
     const [coinData, setCoinData] = useState<CoinDetails | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        const fetchCoinData = async () => {
+          setIsLoading(true);
+          try {
+            const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`);
+            const data = await response.json();
+            setCoinData(data);
+          } catch (error) {
+            console.error('Error fetching coin data:', error);
+          }
+          setIsLoading(false);
+        };
+    
         if (coinId) {
-            fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`)
-                .then(response => response.json())
-                .then(data => setCoinData(data));
+          fetchCoinData();
         }
-    }, [coinId]);
+      }, [coinId]);
 
     if (!coinData) return (
     <Card style={{ display: 'flex', flexDirection: 'row', gap: '20px', padding: '20px' }}>
-        Loading...
+        <DetailedCoinInfoSkeleton/>
     </Card>);
 
     return (

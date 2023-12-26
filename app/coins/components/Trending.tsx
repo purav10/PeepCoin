@@ -22,7 +22,7 @@ interface TrendingCoin {
 }
 
 interface TrendingCoinsProps {
-    onTrendingCoinSelect: (coinId: string) => void; // Define the prop for handling coin selection
+    onTrendingCoinSelect: (coinId: string) => void; 
   }
   
   const TrendingCoins = ({ onTrendingCoinSelect }: TrendingCoinsProps) => {
@@ -42,7 +42,6 @@ interface TrendingCoinsProps {
       fetchTrendingCoins();
     }, []);
   
-    // Function to handle coin click and pass the selected coin's id to the parent component
     const handleCoinClick = (coinId: string) => {
       onTrendingCoinSelect(coinId);
     };
@@ -52,7 +51,7 @@ interface TrendingCoinsProps {
           <ScrollAreaPrimitive.Root className="ScrollAreaRoot" style={{ width: 500, height: 685, overflow: 'hidden' }}>
             <ScrollAreaPrimitive.Viewport style={{ width: '100%', height: '100%' }}>
               <Card className="w-500px h-400px overflow-auto">
-                <CardHeader>Trending</CardHeader>
+                <CardHeader>Trending Coins</CardHeader>
                 <Table className="bg-background text-foreground">
                   <TableHeader className="text-center">
                     <TableRow>

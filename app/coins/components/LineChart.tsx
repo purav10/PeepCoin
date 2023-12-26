@@ -3,10 +3,10 @@ import { Chart, registerables } from 'chart.js';
 import 'chartjs-adapter-moment';
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import LineChartSkeleton from './LineChartSkeleton';
+
 
 Chart.register(...registerables);
-
-// Cache object
 interface DataCache {
   [key: string]: any;
 }
@@ -14,7 +14,6 @@ const dataCache : DataCache = {};
 
 const fetchCoinData = async (coinId: string, days = '1', currency = 'usd') => {
   const cacheKey = `${coinId}-${days}-${currency}`;
-  // Check if data is in cache
   if (dataCache[cacheKey]) {
     return dataCache[cacheKey];
   }
@@ -22,7 +21,6 @@ const fetchCoinData = async (coinId: string, days = '1', currency = 'usd') => {
   const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}`);
   const data = await response.json();
   
-  // Store data in cache
   dataCache[cacheKey] = data;
   return data;
 };
@@ -34,11 +32,15 @@ const LineChart = ({ coinId = 'bitcoin' }) => {
   const [prices, setPrices] = useState<Array<[number, number]>>([]);
   const [selectedDays, setSelectedDays] = useState('1');
   const [selectedCurrency, setSelectedCurrency] = useState('usd');
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const fetchAndSetData = async () => {
+      setLoading(true);
       const data = await fetchCoinData(coinId, selectedDays, selectedCurrency);
       setPrices(data.prices);
+      setLoading(false);
     };
 
     if (coinId) {
@@ -80,6 +82,10 @@ const LineChart = ({ coinId = 'bitcoin' }) => {
       }
     }
   }, [prices]);
+  
+  if (loading) {
+    return <LineChartSkeleton />;
+  }
 
   return (
     <div style={{ height: "100%", width: "100%", padding: "20px" }}>

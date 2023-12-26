@@ -9,6 +9,10 @@ import { Card, CardHeader } from '@/components/ui/card';
 import NewsFeed from './components/NewsFeed';
 import CoinTicker from './components/CoinTicker';
 import styled from 'styled-components';
+import LineChartSkeleton from './components/LineChartSkeleton';
+import DetailedCoinInfoSkeleton from './components/DetailedCoinInfoSkeleton';
+import CoinTickerSkeleton from './components/CoinTickerSkeleton';
+
 
 const PageContainer = styled.div`
   padding: 20px;
@@ -103,9 +107,12 @@ const GraphPage = () => {
 
       <FlexRow>
         <MainContent>
-            <CoinSearchBar onCoinSelect={handleCoinSelect} />
+          <CoinSearchBar onCoinSelect={handleCoinSelect} />
           {isLoading ? (
-            <SkeletonLoader />
+            <>
+              <DetailedCoinInfoSkeleton />
+              <LineChartSkeleton />
+            </>
           ) : (
             <>
               {selectedCoinId && <DetailedCoinInfo coinId={selectedCoinId} />}
@@ -118,14 +125,14 @@ const GraphPage = () => {
         </MainContent>
 
         <Sidebar>
-        <Card style={{ width: '500px' }}>
-          <TrendingCoins onTrendingCoinSelect={handleCoinSelect} />
-        </Card>
-        <Card style={{ width: '500px', marginTop: '20px' }}> 
+          <Card style={{ width: '500px' }}>
+            <TrendingCoins onTrendingCoinSelect={handleCoinSelect} />
+          </Card>
+          <Card style={{ width: '500px', marginTop: '20px' }}>
             <div>
-            {selectedCoinId && <CoinTicker coinId={selectedCoinId} />}
+              {isLoading ? <CoinTickerSkeleton /> : selectedCoinId && <CoinTicker coinId={selectedCoinId} />}
             </div>
-        </Card>
+          </Card>
         </Sidebar>
       </FlexRow>
 
