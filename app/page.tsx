@@ -55,7 +55,7 @@ export default function Home() {
                 Crypto Aggregator
               </h2>
               <p className="text-[14px] leading-[20px] text-[#1a2b3b] font-normal">
-                Click on 'Explore' to navigate through the APIs integrated in this website.
+                Click on &apos;Explore&apos; to navigate through the APIs integrated in this website.
               </p>
             </div>
           </motion.div>
