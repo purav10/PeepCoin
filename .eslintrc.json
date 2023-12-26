@@ -3,6 +3,6 @@
   "rules": {
     "react/no-unescaped-entities": 0,
     "@next/next/no-page-custom-font": 0,
-    "react/no-unknown-property": ["error", { "ignore": ["tsx"] }]
+    "react/no-unknown-property": ["error", { "ignore": ["jsx", "tsx"] }]
   }
 }
