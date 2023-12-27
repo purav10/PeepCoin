@@ -27,8 +27,8 @@ interface TrendingCoinsProps {
   }
   
   const ScrollAreaRoot = styled(ScrollAreaPrimitive.Root)`
-  width: 100%; // Use 100% width for responsiveness
-  height: 685px; // Adjust height as needed
+  width: 100%; 
+  height: 685px;
   overflow: hidden;
 
   @media screen and (max-width: 768px) {
@@ -77,7 +77,7 @@ interface TrendingCoinsProps {
                       <TableRow
                         key={coin.item.id}
                         onClick={() => handleCoinClick(coin.item.id)}
-                        className="trending-row" // Add a class for styling
+                        className="trending-row" 
                       >
                         <TableCell>
                           <img src={coin.item.large} alt={coin.item.name} style={{ width: '30px', height: '30px', marginRight: '10px' }} />
