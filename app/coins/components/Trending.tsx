@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardHeader } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
+import styled from 'styled-components';
 
 interface CoinData {
     price: string;
@@ -25,6 +26,15 @@ interface TrendingCoinsProps {
     onTrendingCoinSelect: (coinId: string) => void; 
   }
   
+  const ScrollAreaRoot = styled(ScrollAreaPrimitive.Root)`
+  width: 100%; // Use 100% width for responsiveness
+  height: 685px; // Adjust height as needed
+  overflow: hidden;
+
+  @media screen and (max-width: 768px) {
+    // Optional: additional styles for smaller screens
+  }
+`;
   const TrendingCoins = ({ onTrendingCoinSelect }: TrendingCoinsProps) => {
     const [trendingCoins, setTrendingCoins] = useState<TrendingCoin[]>([]);
     
@@ -47,8 +57,8 @@ interface TrendingCoinsProps {
     };
   
     return (
-        <div style={{ display: 'flex', justifyContent: 'right', padding: '20px' }}>
-          <ScrollAreaPrimitive.Root className="ScrollAreaRoot" style={{ width: 500, height: 685, overflow: 'hidden' }}>
+      <div style={{ display: 'flex', justifyContent: 'right', padding: '20px' }}>
+        <ScrollAreaRoot>
             <ScrollAreaPrimitive.Viewport style={{ width: '100%', height: '100%' }}>
               <Card className="w-500px h-400px overflow-auto">
                 <CardHeader>Trending Coins</CardHeader>
@@ -92,7 +102,7 @@ interface TrendingCoinsProps {
             </ScrollAreaPrimitive.Scrollbar>
     
             <ScrollAreaPrimitive.Corner />
-          </ScrollAreaPrimitive.Root>
+          </ScrollAreaRoot>
         </div>
       );
     };
