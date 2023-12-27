@@ -32,7 +32,15 @@ interface TrendingCoinsProps {
   overflow: hidden;
 
   @media screen and (max-width: 768px) {
-    // Optional: additional styles for smaller screens
+  }
+`;
+const TableRowStyled = styled(TableRow)`
+  cursor: pointer;
+  transition: background-color 0.3s ease, filter 0.3s ease;
+
+  &:hover {
+    background-color: #f5f5f5; 
+    filter: brightness(95%);
   }
 `;
   const TrendingCoins = ({ onTrendingCoinSelect }: TrendingCoinsProps) => {
@@ -74,11 +82,7 @@ interface TrendingCoinsProps {
                   </TableHeader>
                   <TableBody>
                     {trendingCoins.map(coin => (
-                      <TableRow
-                        key={coin.item.id}
-                        onClick={() => handleCoinClick(coin.item.id)}
-                        className="trending-row" 
-                      >
+                      <TableRowStyled key={coin.item.id} onClick={() => handleCoinClick(coin.item.id)} className="trending-row">
                         <TableCell>
                           <img src={coin.item.large} alt={coin.item.name} style={{ width: '30px', height: '30px', marginRight: '10px' }} />
                         </TableCell>
@@ -86,7 +90,7 @@ interface TrendingCoinsProps {
                         <TableCell>{coin.item.symbol.toUpperCase()}</TableCell>
                         <TableCell>{coin.item.market_cap_rank}</TableCell>
                         <TableCell>{coin.item.data.price}</TableCell>
-                      </TableRow>
+                      </TableRowStyled>
                     ))}
                   </TableBody>
                 </Table>
