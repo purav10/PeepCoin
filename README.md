@@ -1,9 +1,9 @@
 ## Features
 
 - **Line Chart**: Visual representation of cryptocurrency prices over time.
-- **Coin Search Bar**: Allows users to search for specific cryptocurrencies.
+- **Coin Search Bar**: Allows users to search for specific cryptocoins.
 - **Trending Coins**: Displays a list of currently trending cryptocurrencies.
-- **Detailed Coin Information**: Shows detailed information about each selected cryptocurrency.
+- **Detailed Coin Information**: Shows detailed information about each selected coin.
 - **News Feed**: Provides the latest news related to the cryptocurrency market.
 
 ## Components
