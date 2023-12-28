@@ -72,3 +72,8 @@
     This will run the app in development mode. Open http://localhost:3000 to view it in the browser. The page will reload if you make edits.
 
 ### This project is deployed on vercel app (https://peepcoin.vercel.app/)
+
+## Demo Video
+
+To see the PeepCoin in action, watch the demo video here: [PeepCoin Demo Video](https://drive.google.com/file/d/1BpHhr82TTP49U9f8ckitrSUcemaW-E9W/view?usp=drive_link)
+
