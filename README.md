@@ -1,3 +1,8 @@
+<p align="center">
+    <img src="https://0x0.st/HEar.png" alt="PeepCoin Logo">
+	<h1 align="center">PeepCoin : Crypto Aggregator</h1>
+</p>
+
 ## Features
 
 - **Line Chart**: Visual representation of cryptocurrency prices over time.
