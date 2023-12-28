@@ -4,6 +4,32 @@ import 'chartjs-adapter-moment';
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import LineChartSkeleton from './LineChartSkeleton';
+import styled from 'styled-components';
+
+const ChartContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  .tabs-container, .select-container {
+    flex-grow: 1;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+`;
 
 
 Chart.register(...registerables);
@@ -88,9 +114,10 @@ const LineChart = ({ coinId = 'bitcoin' }) => {
   }
 
   return (
-    <div style={{ height: "100%", width: "100%", padding: "20px" }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <Tabs value={selectedDays} onValueChange={setSelectedDays} style={{ flexGrow: 1, marginRight: '50px' }}>
+    <ChartContainer>
+    <div className="controls">
+      <div className="tabs-container">
+        <Tabs value={selectedDays} onValueChange={setSelectedDays}>
           <TabsList>
             <TabsTrigger value="1">1 Day</TabsTrigger>
             <TabsTrigger value="14">14 Days</TabsTrigger>
@@ -98,21 +125,25 @@ const LineChart = ({ coinId = 'bitcoin' }) => {
             <TabsTrigger value="max">Max</TabsTrigger>
           </TabsList>
         </Tabs>
-
-        <Select onValueChange={setSelectedCurrency} defaultValue={selectedCurrency}>
-        <SelectTrigger>
-          <SelectValue placeholder="Currency" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="usd">USD</SelectItem>
-          <SelectItem value="jpy">JPY</SelectItem>
-          <SelectItem value="eur">EUR</SelectItem>
-        </SelectContent>
-      </Select>
       </div>
 
-      <canvas ref={ref}></canvas>
+      <div className="select-container">
+        <Select onValueChange={setSelectedCurrency} defaultValue={selectedCurrency}>
+          <SelectTrigger>
+            <SelectValue placeholder="Currency" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="usd">USD</SelectItem>
+            <SelectItem value="jpy">JPY</SelectItem>
+            <SelectItem value="eur">EUR</SelectItem>
+            <SelectItem value="inr">INR</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
     </div>
+
+    <canvas ref={ref}></canvas>
+  </ChartContainer>
   );
 }
 
