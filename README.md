@@ -26,9 +26,8 @@
 	- Shows detailed information about a selected cryptocurrency, including market cap, price, and other relevant data.
 	- API used : https://api.coingecko.com/api/v3/coins/${coinId}
 - `NewsFeed`: 
-	- Displays the latest news related to cryptocurrency.
-	- API used : https://newsapi.org/v2/everything?q=${coinId}&apiKey="YOUR_API_KEY"
-	- The developer mode of news API only enables CORS on localhost that is why the newsAPI doesn't work on deployed Vercel App.
+	- Displays the latest news related to coinID.
+	- API used : https://content.guardianapis.com/search?q=${coinId}&api-key=${API_KEY}
 - `CoinTicker`:
 	- Shows ticker information about a selected cryptocurrency.
 	- API used : https://api.coingecko.com/api/v3/coins/${coinId}/tickers
